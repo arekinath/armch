@@ -7,15 +7,17 @@ pkgver=1.17.4
 pkgrel=1
 pkgdesc="Utilities for rescue and embedded systems"
 arch=("i686" "x86_64" "arm")
-provides=('sh')
+provides=('sh' 'sed' 'tar' 'awk' 'vi' 'coreutils')
 url="http://busybox.net"
 license=('GPL')
 makedepends=("make" "gcc" "sed" "ncurses")
 options=()
 source=($url/downloads/$pkgname-$pkgver.tar.bz2 \
-	config)
+	config symlinks.sh)
 md5sums=('b3254232e9919007ca803d3a4fe81f3c'
-         '8d4c8f627993d2f06b6c1ca19810a4c9')
+         '8d4c8f627993d2f06b6c1ca19810a4c9'
+         'df387b71d660834fc0d0f744a17075bb')
+
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -25,4 +27,10 @@ build() {
   make
   mkdir $pkgdir/bin
   install -m755 busybox $pkgdir/bin/
+  
+  cd $pkgdir/bin
+  source $srcdir/symlinks.sh
+  for x in $LINKS; do
+    ln -s busybox $x
+  done
 }

@@ -22,6 +22,9 @@ build() {
   # http://permalink.gmane.org/gmane.comp.lib.ncurses.bugs/3559
   patch -Np1 -i ${srcdir}/set_field_buffer.patch
 
+  cd ${srcdir}/${pkgname}-${pkgver}
+  libtoolize
+
   cd ${srcdir}/ncursesw-build
   ../${pkgname}-${pkgver}/configure --prefix=/usr --mandir=/usr/share/man \
      --with-shared --with-normal --without-debug --without-ada \
