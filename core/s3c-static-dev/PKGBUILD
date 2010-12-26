@@ -1,0 +1,62 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=s3c-static-dev
+pkgver=1.0
+pkgrel=1
+pkgdesc="Static device nodes for the s3c"
+arch=(any)
+url=""
+license=('GPL')
+groups=()
+depends=(filesystem)
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=()
+noextract=()
+md5sums=() #generate with 'makepkg -g'
+
+build() {
+  mkdir $pkgdir/dev
+}
+
+package() {
+  cd $pkgdir/dev
+
+  mknod console c 5 1
+  mknod ttySAC0 c 204 64
+  mknod tty c 5 0
+  mknod tty0 c 4 0
+  mknod tty1 c 4 1
+  mknod tty2 c 4 2
+  mknod fb0 c 29 0
+  mknod mmcblk0 b 179 0
+  mknod mmcblk0p1 b 179 1
+  mknod mmcblk0p2 b 179 2
+  mknod mmcblk0p3 b 179 3
+  mknod mmcblk0p4 b 179 4
+  mknod mmcblk0p5 b 179 5
+  mknod null c 2 2
+  mknod mtdblk0 b 31 0
+  mknod mtdblk0p1 b 31 1
+  mknod mtdblk0p2 b 31 2
+  mknod mtdblk0p3 b 31 3
+  mknod mtdblk0p4 b 31 4
+  mknod mtdblk0p5 b 31 5
+
+  chown root:wheel *
+  chmod 600 *
+  chmod 777 null
+}
+
+# vim:set ts=2 sw=2 et:
