@@ -19,19 +19,18 @@ provides=(gdb libstdc++ gcc glibc gcc-lib binutils autoconf automake make patch 
 conflicts=()
 replaces=()
 backup=()
-options=()
+options=(!strip)
 install=
 changelog=
 source=()
 noextract=()
 md5sums=() #generate with 'makepkg -g'
 
-build() {
-}
-
 package() {
   cd $pkgdir
   cp -r $HOME/x-tools/arm-s3c-linux-gnueabi/arm-s3c-linux-gnueabi/sys-root/* ./
+  chown -R root:wheel *
+  chmod -R u+wX *
 }
 
 # vim:set ts=2 sw=2 et:
