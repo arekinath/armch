@@ -1,0 +1,37 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=ct-toolchain
+pkgver=1.0
+pkgrel=1
+pkgdesc=""
+arch=(arm)
+url=""
+license=('GPL')
+groups=()
+depends=()
+makedepends=()
+optdepends=()
+provides=(gcc glibc gcc-lib binutils autoconf automake make patch kernel26)
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=()
+noextract=()
+md5sums=() #generate with 'makepkg -g'
+
+build() {
+}
+
+package() {
+  cd $pkgdir
+  cp -r $HOME/x-tools/arm-s3c-linux-gnueabi/arm-s3c-linux-gnueabi/sys-root/* ./
+}
+
+# vim:set ts=2 sw=2 et:
