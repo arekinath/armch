@@ -6,13 +6,13 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=s3c-init
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Inittab and scripts for armch"
 arch=(any)
 url=""
 license=('GPL')
 groups=()
-depends=(busybox)
+depends=(monit busybox)
 makedepends=()
 optdepends=()
 provides=(sysvinit init)
@@ -37,4 +37,4 @@ package() {
 md5sums=('2ccd6e7913300bd67ab035b7602a32c1'
          '20d9d1e05d42327b3a373e8ff43c8fe8'
          '545f7e22da2acf9b5c4f4fcd23e9b433'
-         '43df8ed1bf7c13c8d14bf81af5dd1d65')
+         'a57573a3eed7d61d514afc38de36bb7a')

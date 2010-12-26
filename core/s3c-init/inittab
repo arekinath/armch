@@ -1,2 +1,3 @@
 ::sysinit:/etc/rc.sysinit
+::respawn:/usr/bin/monit -Ic /etc/monitrc
 ::respawn:/sbin/login
