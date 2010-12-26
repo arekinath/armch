@@ -1,0 +1,77 @@
+#!/bin/sh
+
+. /etc/rc.conf
+
+echo " "
+echo "Armch - Arch for ARM!"
+echo "Based on archlinux -- http://archlinux.org"
+echo " "
+
+echo "Mounting /proc"
+/bin/mount -n -t proc none /proc
+echo "Mounting /sys"
+/bin/mount -n -t sysfs none /sys
+echo "Mounding /dev udev ramdisk"
+if grep -q devtmpfs /proc/filesystems 2>/dev/null; then
+  /bin/mount -n -t devtmpfs udev /dev -o mode=0755,size=10M,nosuid
+else
+  /bin/mount -n -t tmpfs udev /dev -o mode=0755,size=10M,nosuid
+fi
+
+# Copy static device nodes to /dev
+/bin/cp -a /lib/udev/devices/* /dev/
+
+echo > /proc/sys/kernel/hotplug
+
+echo "Starting UDev Daemon"
+/sbin/udevd --daemon
+
+if /bin/pidof -o %PPID /sbin/udevd >/dev/null; then
+  echo "Triggering UDev uevents"
+  /sbin/udevadm control --property=STARTUP=1
+  /sbin/udevadm trigger --action=add
+fi
+
+# Load modules from the MODULES array defined in rc.conf
+if ! [ "$load_modules" = "off" ]; then
+  if [ -f /proc/modules ]; then
+    echo "Loading Modules"
+    for mod in "${MODULES[@]}"; do
+      if [ "$mod" = "${mod#!}" ]; then
+        echo " + $mod"
+        /sbin/modprobe $mod
+      fi
+    done
+  fi
+fi
+
+# Wait for udev uevents
+if /bin/pidof -o %PPID /sbin/udevd >/dev/null; then
+  echo "Waiting for UDev uevents to be processed"
+  /sbin/udevadm settle
+  /sbin/udevadm control --property=STARTUP=
+fi
+
+# bring up the loopback interface
+if [ -d /sys/class/net/lo ]; then
+  echo -n "Bringing up loopback interface"
+  /sbin/ifconfig lo 127.0.0.1 up
+  if [ $? -ne 0 ]; then
+    echo " - FAILED!"
+  else
+    echo " - ok"
+  fi
+fi
+
+echo "Activating swapspace"
+/sbin/swapon -a
+
+echo " "
+echo "Loading /etc/sysctl.conf"
+# Load sysctl variables if sysctl.conf is present
+[ -r /etc/sysctl.conf ] && /sbin/sysctl -q -p &>/dev/null
+
+if [ -x /etc/rc.local ]; then
+  /etc/rc.local
+fi
+

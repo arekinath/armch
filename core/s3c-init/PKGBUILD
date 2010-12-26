@@ -1,0 +1,40 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=s3c-init
+pkgver=1.0
+pkgrel=1
+pkgdesc="Inittab and scripts for armch"
+arch=(any)
+url=""
+license=('GPL')
+groups=()
+depends=(busybox)
+makedepends=()
+optdepends=()
+provides=(sysvinit init)
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(rc.conf rc.sysinit rc.local inittab)
+noextract=()
+
+package() {
+  mkdir $pkgdir/etc
+  cd $pkgdir/etc
+  cp -r $srcdir/* ./
+  chmod 644 rc.conf inittab
+  chmod 755 rc.sysinit rc.local
+}
+
+# vim:set ts=2 sw=2 et:
+md5sums=('2ccd6e7913300bd67ab035b7602a32c1'
+         '20d9d1e05d42327b3a373e8ff43c8fe8'
+         '545f7e22da2acf9b5c4f4fcd23e9b433'
+         '43df8ed1bf7c13c8d14bf81af5dd1d65')
