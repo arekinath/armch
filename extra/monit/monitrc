@@ -1,0 +1,10 @@
+# Main monit configuration file
+
+set daemon 120
+set logfile /var/log/monit.log
+set httpd port 2812 and use address localhost
+     allow localhost
+     allow admin:monit
+
+# include actual service definitions
+include /etc/monit.d/*

@@ -1,0 +1,48 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=monit
+pkgver=5.2.3
+pkgrel=1
+pkgdesc="A utility for managing and monitoring, processes, files, directories and filesystems on a UNIX system."
+arch=(arm i686 x86_64)
+url="http://www.mmonit.com/monit"
+license=('GPL')
+groups=()
+depends=(openssl pam)
+makedepends=(flex grep)
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(http://mmonit.com/monit/dist/monit-$pkgver.tar.gz
+        monitrc)
+noextract=()
+md5sums=() #generate with 'makepkg -g'
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+  mkdir $pkgdir/etc
+  mkdir $pkgdir/etc/monit.d
+  install -m644 $srcdir/monitrc $pkgdir/etc/
+}
+
+# vim:set ts=2 sw=2 et:
+md5sums=('2772b6f5ad46eb0f73f13e12a26267e1'
+         '52af463caf6c4ebf1099908c0c40f92d')
