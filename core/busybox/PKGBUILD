@@ -4,7 +4,7 @@
 
 pkgname=busybox
 pkgver=1.17.4
-pkgrel=1
+pkgrel=3
 pkgdesc="Utilities for rescue and embedded systems"
 arch=("i686" "x86_64" "arm")
 provides=('sh' 'sed' 'tar' 'awk' 'vi' 'less' 'grep' 'diffutils' 'coreutils')
@@ -28,6 +28,10 @@ build() {
   mkdir $pkgdir/bin
   install -m755 busybox $pkgdir/bin/
   
+  mkdir $pkgdir/sbin
+  install -m755 -T busybox $pkgdir/sbin/login
+  install -m755 -T busybox $pkgdir/sbin/init
+
   cd $pkgdir/bin
   source $srcdir/symlinks.sh
   for x in $LINKS; do
