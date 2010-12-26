@@ -1,0 +1,55 @@
+# This is an example PKGBUILD file. Use this as a start to creating your own,
+# and remove these comments. For more information, see 'man PKGBUILD'.
+# NOTE: Please fill out the license field for your package! If it is unknown,
+# then please put 'unknown'.
+
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=qt-embedded
+pkgver=4.7.1
+pkgrel=1
+pkgdesc=""
+arch=(arm)
+url="http://qt.nokia.com"
+license=('LGPL')
+groups=()
+depends=(tslib zlib)
+makedepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=(http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-$pkgver.tar.gz)
+noextract=()
+md5sums=('6f88d96507c84e9fea5bf3a71ebeb6d7')
+
+build() {
+  cd "$srcdir/qt-everywhere-opensource-src-$pkgver"
+  ./configure -prefix /usr \
+              -nomake examples \
+              -docdir /usr/share/doc \
+              -plugindir /usr/lib/qt/plugins \
+              -importdir /usr/lib/qt/imports \
+              -datadir /usr/share \
+              -translationdir /usr/share/qt/translations \
+              -sysconfdir /etc/qt \
+              -embedded arm -opensource -confirm-license \
+              -no-opengl \
+              -qt-gfx-linuxfb \
+              -qt-kbd-linuxinput \
+              -qt-mouse-tslib \
+              -qt-mouse-pc \
+              -qt-sql-sqlite
+  make
+}
+
+package() {
+  cd "$srcdir/qt-everywhere-opensource-src-$pkgver"
+
+  make INSTALL_ROOT=$pkgdir install
+}
+
+# vim:set ts=2 sw=2 et:
