@@ -66,8 +66,10 @@ do_makepkg "core/fakeroot"
 fi
 
 st "Installing deps for pacman"
+if [[ 3 == 4 ]]; then
 do_makepkg "core/libtool"
 cleanup_sb_libtool
+fi
 do_makepkg "core/bzip2"
 do_makepkg "core/db"
 do_makepkg "core/m4"
