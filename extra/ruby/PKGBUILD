@@ -3,7 +3,7 @@
 # Contributor: John Proctor <jproctor@prium.net>
 # Contributor: Jeramy Rutley <jrutley@gmail.com>
 
-pkgname=('ruby' 'ruby-docs')
+pkgname=('ruby')
 pkgver=1.9.2_p0
 _pkgver=1.9.2-p0
 pkgrel=4
