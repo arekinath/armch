@@ -1,4 +1,6 @@
 ::sysinit:/etc/rc.sysinit
 ::respawn:/usr/bin/monit -Ic /etc/monitrc
-::respawn:/usr/sbin/connmand
 ::respawn:/sbin/login
+::ctrlaltdel:/usr/bin/monit stop all
+::ctrlaltdel:/bin/umount -a -r
+::ctrlaltdel:/bin/swapoff

@@ -73,6 +73,9 @@ echo "Loading /etc/sysctl.conf"
 echo "Setting hostname to $HOSTNAME"
 /bin/hostname $HOSTNAME
 
+echo "Removing dbus pid file"
+/bin/rm -f /var/run/dbus.pid
+
 if [ -x /etc/rc.local ]; then
   /etc/rc.local
 fi
