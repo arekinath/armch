@@ -15,8 +15,6 @@ options=(!libtool)
 install=dbus.install
 source=(http://dbus.freedesktop.org/releases/dbus/dbus-${pkgver}.tar.gz
         10-dbus)
-md5sums=('f59618b18d2fb2bd1fce9e1c5a2a3282'
-         '08f93dd19cffd1b45ab05c1fd4efb560')
 
 build() {
   cd "${srcdir}/dbus-${pkgver}"
@@ -51,3 +49,6 @@ build() {
   install -d -m755 "${pkgdir}/usr/share/licenses/dbus-core"
   install -m644 COPYING "${pkgdir}/usr/share/licenses/dbus-core/"
 }
+
+md5sums=('f59618b18d2fb2bd1fce9e1c5a2a3282'
+         'adf0a5f030aeff5b7afe917d47e87efe')
