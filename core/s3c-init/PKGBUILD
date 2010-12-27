@@ -6,13 +6,13 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=s3c-init
 pkgver=1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Inittab and scripts for armch"
 arch=(any)
 url=""
 license=('GPL')
 groups=()
-depends=(monit busybox)
+depends=(connman monit busybox)
 makedepends=()
 optdepends=()
 provides=(sysvinit init)
