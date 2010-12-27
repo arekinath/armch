@@ -1,0 +1,32 @@
+# Contributor: Martin Stolpe <martin.stople [at] uni-ulm dot org>
+
+pkgname=connman
+pkgver=0.64
+pkgrel=1
+pkgdesc="Wireless LAN network manager"
+url="http://connman.net/"
+arch=('arm' 'i686' 'x86_64')
+license=('GPL2')
+depends=('dbus-core' 'iptables' 'glib2')
+conflicts=('openresolv')
+#makedepends=('bluez' 'wpa_supplicant')
+options=('!libtool')
+# install=('connman.install')
+source=("http://www.kernel.org/pub/linux/network/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+	)
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  patch -Np1 -i ${srcdir}/allow_group_network.diff || return 1
+
+  ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+	--enable-ethernet \
+	--enable-loopback
+
+  make  || return 1
+  make DESTDIR=${pkgdir} install || return 1
+
+  install -Dm755 $srcdir/connmand-daemon $pkgdir/etc/rc.d/connmand
+}
+md5sums=('d0e2c09cc51dbcb8f910411990e56bcb')
