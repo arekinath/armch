@@ -6,7 +6,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=s3c-init
 pkgver=1.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Inittab and scripts for armch"
 arch=(any)
 url=""
@@ -28,9 +28,11 @@ noextract=()
 package() {
   mkdir $pkgdir/etc
   cd $pkgdir/etc
-  cp -r $srcdir/* ./
-  chmod 644 rc.conf inittab
-  chmod 755 rc.sysinit rc.local
+  install -m644 $srcdir/rc.conf $pkgdir/etc/rc.conf
+  install -m644 $srcdir/rc.sysinit $pkgdir/etc/rc.sysinit
+  install -m644 $srcdir/rc.local $pkgdir/etc/rc.local
+  install -m644 $srcdir/inittab $pkgdir/etc/inittab
+  chown root:wheel $pkgdir/etc/*
 }
 
 # vim:set ts=2 sw=2 et:
