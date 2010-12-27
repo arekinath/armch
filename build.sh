@@ -114,6 +114,10 @@ do_makepkg "extra/libxslt"
 do_makepkg "core/glib2"
 do_makepkg "core/udev"
 
+st "Installing deps for connman"
+do_makepkg "core/dbus-core"
+do_makepkg "extra/connman"
+
 st "Installing base system"
 do_makepkg "core/s3c-static-dev"
 do_makepkg "extra/monit"
