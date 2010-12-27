@@ -26,11 +26,12 @@ echo > /proc/sys/kernel/hotplug
 echo "Starting UDev Daemon"
 /sbin/udevd --daemon
 
-if /bin/pidof -o %PPID /sbin/udevd >/dev/null; then
-  echo "Triggering UDev uevents"
-  /sbin/udevadm control --property=STARTUP=1
-  /sbin/udevadm trigger --action=add
-fi
+echo "Waiting for udevd to settle"
+/sbin/udevadm settle
+
+echo "Triggering UDev uevents"
+/sbin/udevadm control --property=STARTUP=1
+/sbin/udevadm trigger --action=add
 
 # Load modules from the MODULES array defined in rc.conf
 if ! [ "$load_modules" = "off" ]; then
@@ -46,11 +47,9 @@ if ! [ "$load_modules" = "off" ]; then
 fi
 
 # Wait for udev uevents
-if /bin/pidof -o %PPID /sbin/udevd >/dev/null; then
-  echo "Waiting for UDev uevents to be processed"
-  /sbin/udevadm settle
-  /sbin/udevadm control --property=STARTUP=
-fi
+echo "Waiting for UDev uevents to be processed"
+/sbin/udevadm settle
+/sbin/udevadm control --property=STARTUP=
 
 # bring up the loopback interface
 if [ -d /sys/class/net/lo ]; then
