@@ -1,0 +1,5 @@
+check process connman
+  with pidfile /var/run/connmand.pid
+  start program = "/bin/start-stop-daemon -S -b -m -p /var/run/connmand.pid -x /usr/sbin/connmand -- -i eth0 -n"
+  stop program = "/bin/kill `/bin/cat /var/run/connmand.pid`"
+  depends on dbus
