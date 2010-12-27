@@ -112,6 +112,7 @@ do_makepkg "extra/gperf"
 do_makepkg "extra/libxml2"
 do_makepkg "extra/libxslt"
 do_makepkg "core/glib2"
+do_makepkg "core/module-init-tools"
 do_makepkg "core/udev"
 
 st "Installing deps for connman"
