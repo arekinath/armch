@@ -18,3 +18,5 @@ build() {
   mkdir -p ${pkgdir}/usr/share/licenses/ttf-bitstream-vera
   install -m644 COPYRIGHT.TXT ${pkgdir}/usr/share/licenses/ttf-bitstream-vera/LICENSE
 }
+sha1sums=('c3e8505a58d52e198a02960a2bd295e4c7a14242')
+sha256sums=('db5b27df7bbb318036ebdb75acd3e98f1bd6eb6608fb70a67d478cd243d178dc')
