@@ -37,12 +37,12 @@ source $armch_path/functions.sh
 # now the big bit:
 # list of actual actions to take
 
-if [[ 3 == 4 ]]; then
 st "Starting toolchain build"
 ct_ng_build
 
 st "Creating root directory"
 setup_root_dir
+genconf_nofakeroot
 
 st "Installing toolchain package"
 host_makepkg "core/ct-toolchain"
@@ -54,7 +54,6 @@ host_makepkg "core/filesystem"
 st "Creating scratchbox"
 create_scratchbox
 
-genconf_nofakeroot
 st "Installing deps for fakeroot"
 nofakeroot_makepkg "core/ncurses"
 nofakeroot_makepkg "core/busybox"
@@ -63,13 +62,10 @@ nofakeroot_makepkg "core/fakeroot"
 do_makepkg "core/ncurses"
 do_makepkg "core/busybox"
 do_makepkg "core/fakeroot"
-fi
 
 st "Installing deps for pacman"
-if [[ 3 == 4 ]]; then
 do_makepkg "core/libtool"
 cleanup_sb_libtool
-fi
 do_makepkg "core/bzip2"
 do_makepkg "core/db"
 do_makepkg "core/m4"
@@ -83,9 +79,9 @@ do_makepkg "core/xz"
 do_makepkg "core/expat"
 do_makepkg "core/libarchive"
 do_makepkg "core/openssl"
-do_makepkg "core/ca-certificates"
 do_makepkg "core/libfetch"
 do_makepkg "core/pacman"
+redo_pacman_config
 
 st "Installing base utils"
 do_makepkg "core/cracklib"
@@ -122,6 +118,7 @@ do_makepkg "core/s3c-static-dev"
 do_makepkg "extra/monit"
 do_makepkg "core/s3c-init"
 do_makepkg "extra/ruby"
+do_makepkg "core/ca-certificates"
 
 st "Installing touchscreen and qt"
 do_makepkg "fbui/tslib"
