@@ -12,15 +12,13 @@ check file sshd_config
 
 check file ssh_host_key
   with path /etc/ssh/ssh_host_key
-  if failed checksum
-    then exec "/usr/bin/ssh-keygen -t rsa1 -N '' -f /etc/ssh/ssh_host_key"
+  start program = "/usr/bin/ssh-keygen -t rsa1 -N '' -f /etc/ssh/ssh_host_key"
 
 check file ssh_host_rsa_key
   with path /etc/ssh/ssh_host_rsa_key
-  if failed checksum
-    then exec "/usr/bin/ssh-keygen -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key"
+  start program = "/usr/bin/ssh-keygen -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key"
 
 check file ssh_host_dsa_key
   with path /etc/ssh/ssh_host_dsa_key
-  if failed checksum
-    then exec "/usr/bin/ssh-keygen -t dsa -N '' -f /etc/ssh/ssh_host_dsa_key"
+  start program = "/usr/bin/ssh-keygen -t dsa -N '' -f /etc/ssh/ssh_host_dsa_key"
+
