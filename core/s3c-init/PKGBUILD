@@ -5,8 +5,8 @@
 
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=s3c-init
-pkgver=1.0
-pkgrel=6
+pkgver=1.1
+pkgrel=1
 pkgdesc="Inittab and scripts for armch"
 arch=(any)
 url=""
@@ -36,7 +36,12 @@ package() {
 }
 
 # vim:set ts=2 sw=2 et:
-md5sums=('2ccd6e7913300bd67ab035b7602a32c1'
-         '87daf840e48a396a429ad8007967dee9'
-         '545f7e22da2acf9b5c4f4fcd23e9b433'
-         'ff4d8daa2cc5d895e93dd7863bd7ffae')
+
+sha1sums=('3052daeab99abb9ccc480d5c1fd71d59631a4a94'
+          '248305870d8b11a6d0c3246d75239ea083943184'
+          '8edf7de76fc644cb8696068d456cfacd4117e89d'
+          'ac6a19da9c9f1071f12a676f325172ffc1835acd')
+sha256sums=('64bc0192462cc34951fc764ba95bbee241b60b61113234fb69c2fa94b02d9252'
+            '03a12c6dcba588f868b6524afbdd7348804a64a17b3a36c04a5b35c11b803be1'
+            'ee07a1ff2c338d3d789f43284c7799e6b11b7414ef3933f865726714f5a04830'
+            '3730a58b9c0a209e17c75a8b654f4e98dbacc1341360dec47d817b13e2149ed1')

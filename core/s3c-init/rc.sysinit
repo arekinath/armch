@@ -70,6 +70,9 @@ echo "Loading /etc/sysctl.conf"
 # Load sysctl variables if sysctl.conf is present
 [ -r /etc/sysctl.conf ] && /sbin/sysctl -q -p &>/dev/null
 
+echo "Setting hostname to $HOSTNAME"
+/bin/hostname $HOSTNAME
+
 if [ -x /etc/rc.local ]; then
   /etc/rc.local
 fi
