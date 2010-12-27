@@ -1,0 +1,26 @@
+check process sshd
+  with pidfile "/var/run/sshd.pid"
+  start program = "/usr/sbin/sshd" with timeout 30 seconds
+  stop program = "/bin/kill `cat /var/run/sshd.pid`"
+  if failed port 22 then restart
+  depends on ssh_host_key, ssh_host_rsa_key, ssh_host_dsa_key, sshd_config
+
+check file sshd_config
+  with path /etc/ssh/sshd_config
+  if changed checksum
+    then exec "/bin/kill `cat /var/run/sshd.pid`"
+
+check file ssh_host_key
+  with path /etc/ssh/ssh_host_key
+  if failed checksum
+    then exec "/usr/bin/ssh-keygen -t rsa1 -N '' -f /etc/ssh/ssh_host_key"
+
+check file ssh_host_rsa_key
+  with path /etc/ssh/ssh_host_rsa_key
+  if failed checksum
+    then exec "/usr/bin/ssh-keygen -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key"
+
+check file ssh_host_dsa_key
+  with path /etc/ssh/ssh_host_dsa_key
+  if failed checksum
+    then exec "/usr/bin/ssh-keygen -t dsa -N '' -f /etc/ssh/ssh_host_dsa_key"

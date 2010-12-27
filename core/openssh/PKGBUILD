@@ -4,7 +4,7 @@
 
 pkgname=openssh
 pkgver=5.6p1
-pkgrel=1
+pkgrel=2
 pkgdesc='A Secure SHell server/client'
 arch=('i686' 'x86_64' arm)
 license=('custom')
@@ -12,11 +12,7 @@ url="http://www.openssh.org/portable.html"
 backup=('etc/ssh/ssh_config' 'etc/ssh/sshd_config' 'etc/pam.d/sshd')
 depends=('openssl' 'zlib')
 source=("ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgname}-${pkgver}.tar.gz"
-        'sshd' 'sshd.confd' 'sshd.pam')
-md5sums=('e6ee52e47c768bf0ec42a232b5d18fb0'
-         '17b1b1bf0f578a55945ee204bd4462af'
-         'e2cea70ac13af7e63d40eb04415eacd5'
-         '1c7c2ea8734ec7e3ca58d820634dc73a')
+        'openssh' 'sshd.pam')
 
 build() {
   cd ${srcdir}/${pkgname}-${pkgver}
@@ -34,11 +30,10 @@ package() {
   cd ${srcdir}/${pkgname}-${pkgver}
   make DESTDIR=${pkgdir} install
 
-  install -Dm755 ${srcdir}/sshd ${pkgdir}/etc/rc.d/sshd
+  install -Dm644 ${srcdir}/openssh ${pkgdir}/etc/monit.d/openssh
 
   install -Dm644 LICENCE ${pkgdir}/usr/share/licenses/${pkgname}/LICENCE
   install -Dm644 ${srcdir}/sshd.pam ${pkgdir}/etc/pam.d/sshd
-  install -Dm644 ${srcdir}/sshd.confd ${pkgdir}/etc/conf.d/sshd
 
   rm ${pkgdir}/usr/share/man/man1/slogin.1
   ln -sf ssh.1.gz ${pkgdir}/usr/share/man/man1/slogin.1.gz
@@ -62,3 +57,9 @@ package() {
     -e 's|^# Host \*|Host *|g' \
     ${pkgdir}/etc/ssh/ssh_config
 }
+sha1sums=('347dd39c91c3529f41dae63714d452fb95efea1e'
+          '62caf2d962b7a956e3693b26b8b02b477ac829c5'
+          '0d242e32e13a9cda4004c07e6930d2e1c5131cfe')
+sha256sums=('538af53b2b8162c21a293bb004ae2bdb141abd250f61b4cea55244749f3c6c2b'
+            'c5f5f36aeac2a9f305d0e05a8e3b449c8e1a57cd96ec8705e8c97199ec08e98a'
+            'fa82d17743a712623d3f2aa1e0a6aeb3dc6d3bbcac75ba19560b4c1405a7a709')
