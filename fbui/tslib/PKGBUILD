@@ -8,8 +8,8 @@
 
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=tslib-git
-pkgver=20101225
-pkgrel=2
+pkgver=20101227
+pkgrel=1
 pkgdesc=""
 arch=(arm)
 url=""
