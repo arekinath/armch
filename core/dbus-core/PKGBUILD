@@ -4,7 +4,7 @@
 #
 pkgname=dbus-core
 pkgver=1.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="http://www.freedesktop.org/Software/dbus"
 arch=(arm i686 x86_64)
@@ -14,7 +14,7 @@ conflicts=('dbus<1.2.3-2')
 options=(!libtool)
 install=dbus.install
 source=(http://dbus.freedesktop.org/releases/dbus/dbus-${pkgver}.tar.gz
-        dbus)
+        10-dbus)
 md5sums=('f59618b18d2fb2bd1fce9e1c5a2a3282'
          '08f93dd19cffd1b45ab05c1fd4efb560')
 
@@ -35,7 +35,7 @@ build() {
   chown 81:81 "${pkgdir}/var/run/dbus"
 
   install -m755 -d "${pkgdir}/etc/rc.d"
-  install -m755 "${srcdir}/dbus" "${pkgdir}/etc/rc.d/"
+  install -m644 "${srcdir}/10-dbus" "${pkgdir}/etc/monit.d/10-dbus"
 
   #Fix configuration file
   sed -i -e 's|<user>81</user>|<user>dbus</user>|' "${pkgdir}/etc/dbus-1/system.conf"

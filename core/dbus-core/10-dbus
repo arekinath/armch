@@ -1,0 +1,5 @@
+check process dbus
+  with pidfile /var/run/dbus.pid
+  start program = "/usr/bin/dbus-daemon --system"
+  stop program = "/bin/kill `/bin/cat /var/run/dbus.pid`"
+  
