@@ -44,5 +44,7 @@ package() {
 }
 
 # vim:set ts=2 sw=2 et:
-md5sums=('2772b6f5ad46eb0f73f13e12a26267e1'
-         '52af463caf6c4ebf1099908c0c40f92d')
+sha1sums=('dae1a63fca9a44cf1bda53691711b8273efe3935'
+          '1ede3f342803065bfa1a89740fbc4ac29024f9c2')
+sha256sums=('920f50e752cbdc8e2c7f009e1c54bfd46f5646ea22bbab96c58eb5d1a19a0d8c'
+            'dae2cb05be40871a3b39af29943e90e82c12d20edc7aaa88bd86b9fcc365dea5')
