@@ -6,7 +6,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=monit
 pkgver=5.2.3
-pkgrel=1
+pkgrel=2
 pkgdesc="A utility for managing and monitoring, processes, files, directories and filesystems on a UNIX system."
 arch=(arm i686 x86_64)
 url="http://www.mmonit.com/monit"
@@ -40,7 +40,7 @@ package() {
   make DESTDIR="$pkgdir/" install
   mkdir $pkgdir/etc
   mkdir $pkgdir/etc/monit.d
-  install -m644 $srcdir/monitrc $pkgdir/etc/
+  install -m600 $srcdir/monitrc $pkgdir/etc/
 }
 
 # vim:set ts=2 sw=2 et:
