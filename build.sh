@@ -42,7 +42,7 @@ ct_ng_build
 
 st "Creating root directory"
 setup_root_dir
-genconf_nofakeroot
+genconf_nofakeroot $armch_path/makepkg.conf
 
 st "Installing toolchain package"
 host_makepkg "core/ct-toolchain"
@@ -106,6 +106,7 @@ do_makepkg "core/util-linux-ng"
 
 st "Installing deps for udev"
 do_makepkg "extra/libffi"
+do_makepkg "core/sqlite3"
 do_makepkg "extra/python2"
 do_makepkg "extra/gperf"
 do_makepkg "extra/libxml2"

@@ -16,11 +16,11 @@ function new_log {
 }
 
 function log_done {
-  echo $1 >> $armch_path/.build
+  echo "$1" >> $armch_path/.build
 }
 
 function not_logged {
-  local v=`cat $armch_path/.build | grep '$1'`
+  local v=`cat $armch_path/.build | grep "$1"`
 	if [[ -n "$v" ]]; then
 		return 1
 	else
