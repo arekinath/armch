@@ -6,7 +6,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=s3c-init
 pkgver=1.0
-pkgrel=4
+pkgrel=5
 pkgdesc="Inittab and scripts for armch"
 arch=(any)
 url=""
@@ -29,8 +29,8 @@ package() {
   mkdir $pkgdir/etc
   cd $pkgdir/etc
   install -m644 $srcdir/rc.conf $pkgdir/etc/rc.conf
-  install -m644 $srcdir/rc.sysinit $pkgdir/etc/rc.sysinit
-  install -m644 $srcdir/rc.local $pkgdir/etc/rc.local
+  install -m755 $srcdir/rc.sysinit $pkgdir/etc/rc.sysinit
+  install -m755 $srcdir/rc.local $pkgdir/etc/rc.local
   install -m644 $srcdir/inittab $pkgdir/etc/inittab
   chown root:wheel $pkgdir/etc/*
 }
