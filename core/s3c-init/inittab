@@ -1,3 +1,4 @@
 ::sysinit:/etc/rc.sysinit
 ::respawn:/usr/bin/monit -Ic /etc/monitrc
+::respawn:/usr/sbin/connmand
 ::respawn:/sbin/login

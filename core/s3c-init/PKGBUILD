@@ -37,4 +37,4 @@ package() {
 md5sums=('2ccd6e7913300bd67ab035b7602a32c1'
          '20d9d1e05d42327b3a373e8ff43c8fe8'
          '545f7e22da2acf9b5c4f4fcd23e9b433'
-         'a57573a3eed7d61d514afc38de36bb7a')
+         'ff4d8daa2cc5d895e93dd7863bd7ffae')
