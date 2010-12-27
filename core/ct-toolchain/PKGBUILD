@@ -28,7 +28,7 @@ md5sums=() #generate with 'makepkg -g'
 
 package() {
   cd $pkgdir
-  cp -r $HOME/x-tools/arm-s3c-linux-gnueabi/arm-s3c-linux-gnueabi/sys-root/* ./
+  cp -r $XTOOLS_ROOT/sys-root/* ./
   chown -R root:wheel *
   chmod -R u+wX *
 }

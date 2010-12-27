@@ -61,8 +61,9 @@ function redo_pacman_config {
 function host_makepkg {
 	if not_logged "host_makepkg $1"; then
 		cd $armch_path/$1
-		rm -fr src pkg *.pkg.*
-		$makepkg --config /tmp/nofakeroot.conf --nodeps || fail "makepkg failed in $1"
+		sudo rm -fr src pkg *.pkg.*
+		export XTOOLS_ROOT=$xtools_dir/$xtools_target/$xtools_target/
+		sudo $makepkg --asroot --config /tmp/nofakeroot.conf --nodeps || fail "makepkg failed in $1"
 		sudo $host_pacman -f --noconfirm -v --nodeps --root $root_dir --arch arm -U $armch_path/$1/*.pkg.* || fail "could not install $1"
 		log_done "host_makepkg $1"
 	fi
