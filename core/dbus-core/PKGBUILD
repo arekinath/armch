@@ -32,7 +32,7 @@ build() {
 
   chown 81:81 "${pkgdir}/var/run/dbus"
 
-  install -m755 -d "${pkgdir}/etc/rc.d"
+  install -m755 -d "${pkgdir}/etc/monit.d"
   install -m644 "${srcdir}/10-dbus" "${pkgdir}/etc/monit.d/10-dbus"
 
   #Fix configuration file
