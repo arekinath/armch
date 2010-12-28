@@ -6,13 +6,13 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=qt-embedded
 pkgver=4.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc=""
 arch=(arm)
 url="http://qt.nokia.com"
 license=('LGPL')
 groups=()
-depends=(tslib zlib)
+depends=(tslib zlib dbus-core)
 makedepends=()
 optdepends=()
 provides=()
@@ -32,13 +32,19 @@ build() {
               -nomake examples \
               -docdir /usr/share/doc \
               -plugindir /usr/lib/qt/plugins \
+              -demosdir /usr/bin/qt-demos \
               -importdir /usr/lib/qt/imports \
               -datadir /usr/share \
               -translationdir /usr/share/qt/translations \
               -sysconfdir /etc/qt \
               -embedded arm -opensource -confirm-license \
               -no-opengl \
+              -dbus \
+              -openssl \
+              -make tools \
               -qt-gfx-linuxfb \
+              -qt-gfx-transformed \
+              -qt-gfx-vnc \
               -qt-kbd-linuxinput \
               -qt-mouse-tslib \
               -qt-mouse-pc \
@@ -50,6 +56,10 @@ package() {
   cd "$srcdir/qt-everywhere-opensource-src-$pkgver"
 
   make INSTALL_ROOT=$pkgdir install
+
+  cd $pkgdir/usr/share/mkspecs/common
+  echo "QMAKE_CFLAGS += -mcpu=arm9 -mtune=arm920t" >> g++.conf
+  echo "QMAKE_CXXFLAGS += -mcpu=arm9 -mtune=arm920t" >> g++.conf
 }
 
 # vim:set ts=2 sw=2 et:
