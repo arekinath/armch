@@ -30,6 +30,8 @@ build() {
   cd "$srcdir/qt-everywhere-opensource-src-$pkgver"
   ./configure -prefix /usr \
               -nomake examples \
+              -nomake tools \
+              -nomake translations \
               -docdir /usr/share/doc \
               -plugindir /usr/lib/qt/plugins \
               -demosdir /usr/bin/qt-demos \
@@ -39,9 +41,8 @@ build() {
               -sysconfdir /etc/qt \
               -embedded arm -opensource -confirm-license \
               -no-opengl \
-              -dbus \
+              -dbus -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -ldbus-1 \
               -openssl \
-              -make tools \
               -qt-gfx-linuxfb \
               -qt-gfx-transformed \
               -qt-gfx-vnc \
