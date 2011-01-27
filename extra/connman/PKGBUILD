@@ -13,10 +13,13 @@ conflicts=('openresolv')
 options=('!libtool')
 # install=('connman.install')
 source=("http://www.kernel.org/pub/linux/network/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
-	20-connman)
+	20-connman
+        erfkill.patch)
 
 build() {
   cd ${srcdir}/${pkgname}-${pkgver}
+
+  patch -p0 < ${srcdir}/erfkill.patch
 
   ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 	--enable-ethernet \
@@ -33,6 +36,8 @@ package() {
 }
 
 sha1sums=('cdcaed0c176ae8aef19c8278d9834387b033d3ac'
-          'c99726a7f2894a8bdc4dd7a91d9c2f58f6b316f4')
+          'c99726a7f2894a8bdc4dd7a91d9c2f58f6b316f4'
+          '662ea9497cc243854cd16567ce1f83a0b41f33c4')
 sha256sums=('4451437450527be276ebb1cca5a9f43e870f26c09ba651f781c7f4be28885ea3'
-            'df97a9b08b9aa936e103ac1c2d4d09b77f15126195cae5d8f04aded6cde586ac')
+            'df97a9b08b9aa936e103ac1c2d4d09b77f15126195cae5d8f04aded6cde586ac'
+            'e5105461b0ff9add30863bbe1034b09b13bdf750cc7aa528bc929575d2d90158')

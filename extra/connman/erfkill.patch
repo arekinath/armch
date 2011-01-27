@@ -1,0 +1,24 @@
+--- src/technology.c.old	2011-01-27 15:21:11.000000000 +1000
++++ src/technology.c	2011-01-27 15:21:34.000000000 +1000
+@@ -535,7 +535,7 @@
+ 		return -ENXIO;
+ 
+ 	if (g_atomic_int_get(&technology->blocked))
+-		return -ERFKILL;
++		return -ENOMEDIUM;
+ 
+ 	type = __connman_device_get_service_type(device);
+ 	__connman_notifier_enable(type);
+--- src/iptables.c.old	2011-01-27 15:27:41.000000000 +1000
++++ src/iptables.c	2011-01-27 15:27:09.000000000 +1000
+@@ -1317,6 +1317,10 @@
+ 	table_cleanup(table);
+ }
+ 
++#ifndef NFPROTO_IPV4
++#define NFPROTO_IPV4 AF_INET
++#endif
++
+ int __connman_iptables_init(void)
+ {
+ 	DBG("");
